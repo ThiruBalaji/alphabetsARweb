@@ -1,22 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
         <title>AR Alphabets </title>
-        <meta name="viewport" content="width=device-width,height=device-height">
-	<meta name="apple-mobile-web-app-capable" content="yes">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-     
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
+
         <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
         <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.5/aframe/build/aframe-ar.js"></script>
-
-
         <script>
-                       
             // Invitation Video Handler
-            
             AFRAME.registerComponent('video-vidhandler', {
                 init: function() {
 		    console.log('video init entered');
@@ -38,7 +31,6 @@
             });
 
             // Count down Timer and Countdown Timer Component
-
             AFRAME.registerComponent('clock-text', {
                 init: function() {
 		    console.log('Timer init entered');
@@ -56,10 +48,8 @@
 
                     var endTime = new Date("May 29, 2020 00:54:00").getTime();
                     var timeRem;
-
                     var timer = setInterval(function() {
                         var currTime = new Date().getTime();
-
                         var diff = endTime - currTime;
 
                         if(diff > 0) {
@@ -75,15 +65,12 @@
                         }
                         el.setAttribute('value', timeRem);
                     }, 1000);
-                    
                 }
             });
 		
 		
 	    // Mappoint component
-		
 	    AFRAME.registerComponent('mappoint-handler', {
-            
 		init: function() {
 		    //console.log("I was triggered");
 		    const marker3 = document.querySelector("#marker3");
@@ -98,47 +85,30 @@
 		    });
 		}
 	    });
-			
-            
         </script>
     </head>
     <body>
 
         <a-scene id="scene" arjs='trackingMethod: best; debugUIEnabled: false;' vr-mode-ui="enabled: false" ar-template >
-            
-            <a-assets>
-
-				<a-assets>
-					<a-asset-item id="apple3d" src="https://raw.githubusercontent.com/nicolocarpignoli/nicolocarpignoli.github.io/master/ar-playground/models/CesiumMan.gltf"></a-asset-item>
-				</a-assets>
-                
-                <!-- Invitation  Video -->
-                
+   
+			<a-assets>
+				<a-asset-item id="apple3d" src="https://raw.githubusercontent.com/nicolocarpignoli/nicolocarpignoli.github.io/master/ar-playground/models/CesiumMan.gltf"></a-asset-item>
+			
                 <video preload="none" id="invitation" response-type="arraybuffer" loop="false" crossorigin webkit-playsinline playsinline controls>
                     <source  src="videos/invitation.mp4">
                 </video>
 
-                <!-- Map point Image -->
-
-                <img id="map-point" src="images/apple.jpg">     
+				<img id="map-point" src="assets/images/apple.jpg">     
                 
-                <!-- Texture Image -->
-
                 <img id="texture" src="images/texture.jpg">
-
             </a-assets>
-            
-           
-            
-            <!-- Invitation Video Marker -->
+
 
             <a-marker id="marker1" type='pattern' url='markers/invi-pattern-marker.patt' video-vidhandler>
                 <!--<a-box position='0 0 0' material='color: red;'></a-box>-->
                 <a-plane scale = "4 2" position='0 0.1 0' rotation="-90 0 0" material='transparent:true;src:#invitation' controls></a-plane>
                 <!--<a-entity text="font: https://cdn.aframe.io/fonts/mozillavr.fnt; value: Fun Moments"></a-entity>-->
             </a-marker>
-
-            <!-- Count down Timer Marker -->
 
             <a-marker id="marker2" type='pattern' url='markers/timer-pattern-marker.patt'>
                 <!--<a-box position='0 0 0' material='color: red;'></a-box>-->
@@ -148,11 +118,7 @@
                 <a-plane scale="2 1" position="0 0.1 0" rotation="-90 0 0" src="#texture">
                     <a-text id="timer" clock-text value="00:00:00:00" width="1.5" height="1" position="-0.451 0.041 0.000" color="#FFFFFF"></a-text>
                 </a-plane>
-
-                
             </a-marker>
-
-            <!-- Map Location Marker -->
 
             <a-marker id="marker3" type='pattern' url='markers/Apple.patt' emitevents="true" cursor="rayOrigin: mouse" mappoint-handler>
                 <!--<a-box position='0 0 0' material='color: red;'></a-box>-->
@@ -160,13 +126,7 @@
                 <!--<a-entity text="font: https://cdn.aframe.io/fonts/mozillavr.fnt; value: Fun Moments"></a-entity>-->
             </a-marker>     
             
-            
-            <!-- Camera -->
-
             <a-entity camera></a-entity>
-
         </a-scene>
-
-
     </body>
 </html>
